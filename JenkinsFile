@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building sprintboot 2.6..'
             }
         }
         stage('Test') {
