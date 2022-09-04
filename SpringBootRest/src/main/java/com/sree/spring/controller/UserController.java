@@ -18,4 +18,9 @@ public class UserController {
     public String findById(@PathVariable("id") Long id) {
         return "Hello findBy Id with Id";
     }
+	
+	@GetMapping(value = "/{name}")
+    public String findByName(@PathVariable("name") String name) {
+        return "Hello findBy Id with Id";
+    }
 }
