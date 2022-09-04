@@ -16,6 +16,6 @@ public class UserController {
 	
 	@GetMapping(value = "/{id}")
     public String findById(@PathVariable("id") Long id) {
-        return "Hello Sree with Id";
+        return "Hello findBy Id with Id";
     }
 }
