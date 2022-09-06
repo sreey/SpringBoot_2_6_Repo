@@ -70,7 +70,7 @@ pipeline {
             }
         }
 
-        stage('Building our image') {
+        stage('Building Docker image') {
             steps {
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -79,7 +79,7 @@ pipeline {
 
         }
 
-        stage('Deploy our image') {
+        stage('Push Docker image to docker hub') {
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
@@ -96,5 +96,5 @@ pipeline {
         }
     }
 
-    
+
 }
