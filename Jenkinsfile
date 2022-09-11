@@ -74,16 +74,21 @@ pipeline {
             }
             post {
                 success {
-                    junit 'target/surefire-reports/**/*.xml'
+                    sh '''
+                        echo "Running build post success Analysis"
+                          echo "PWD = ${PWD}"
+                    '''
+                  //  junit 'target/surefire-reports/**/*.xml'
                 }
             }
         }
 
         stage('Building Docker image') {
             steps {
-                script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                }
+                sh '''
+                      cd SpringBootRest
+                      mvn docker:build
+                '''
             }
 
         }
