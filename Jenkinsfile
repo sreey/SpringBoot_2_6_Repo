@@ -60,7 +60,7 @@ pipeline {
                 branch 'feature/*'
             }
             steps {
-                sh 'mvn clean install'
+                sh """
                 echo "Building Artifact"
                 """
 
