@@ -117,8 +117,11 @@ pipeline {
 
         }
 
-       stage('Docker Build') {
+       stage('Push Docker Build') {
        steps {
+       sh '''
+       echo "Pushing docker image"
+       '''
         //  script {
         //    docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
         //       app = docker.build("${dockerRegistry}/${dockerRepository}/SpringBootRest:latest", "--pull --no-cache .")
