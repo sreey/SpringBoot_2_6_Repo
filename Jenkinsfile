@@ -3,12 +3,11 @@ pipeline {
     environment {
       registry = "sreeygcp/springboot_2_6_docker_repo"
       registryCredential = 'DockerHub_id'
-      dockerImage = ''
+      app = ''
     }
     agent {
         node {
             label 'master'
-            def app
         }
     }
 
