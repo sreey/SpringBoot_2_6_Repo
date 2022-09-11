@@ -109,22 +109,23 @@ pipeline {
 
         }
 
-        stage('Push Docker image to docker hub') {
-            steps {
-                  docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
-                     image = docker.build("${dockerRegistry}/$(dockerRepository)", "--pull --no-cache .")
-                     image.push()
-                  }
-                }
-            }
-        }
+        docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
+
+       stage('Docker Build') {
+           image = docker.build("${dockerRegistry}/$(dockerRepository)", "--pull --no-cache .")
+       }
+
+       stage('Docker Push') {
+           image.push()
+       }
+   }
 
         stage('Cleaning up') {
             steps {
             sh """
             echo "Running Cleaning Up"
             """
-              
+
             }
         }
     }
