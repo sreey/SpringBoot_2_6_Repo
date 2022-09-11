@@ -90,17 +90,43 @@ pipeline {
                       mvn clean install
                 '''
             }
+            post {
+                success {
+                    sh '''
+                        echo "Running build post success Analysis"
+
+                          cd SpringBootRest
+                          echo "PWD = ${PWD}"
+                    '''
+                //    junit 'target/surefire-reports/**/*.xml'
+                }
+            }
         }
 
+        stage('Building Docker image') {
+            steps {
+               sh '''
+                 cd SpringBootRest
+                  echo "Running build docker image"
+                  app= mvn docker:build
 
+
+                '''
+
+            }
+
+        }
 
        stage('Docker Build') {
        steps {
-            withCredentials([usernamePassword(credentialsId: 'DockerHub_id')]) {
-              sh "docker login -u sreeygcp -p aadvik5958"
-              sh "docker build -t registry.hub.docker.com/sreeygcp/springboot_2_6_docker_repo/SpringBootRest:latest"
-              sh "docker push registry.hub.docker.com/sreeygcp/springboot_2_6_docker_repo/SpringBootRest:latest"
-            }
+        //  script {
+        //    docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
+        //       app = docker.build("${dockerRegistry}/${dockerRepository}/SpringBootRest:latest", "--pull --no-cache .")
+        //       app.push()
+        //    }
+        //  }
+
+
           }
        }
 
