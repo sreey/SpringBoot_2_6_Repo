@@ -58,6 +58,7 @@ pipeline {
         stage ('Initialize') {
             steps {
                 sh '''
+                    echo "PWD = ${PWD}"
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 '''
@@ -66,7 +67,8 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'mvn - f SpringBootRest/pom.xml clean install' 
+                cd SpringBootRest
+                sh 'mvn clean install'
             }
             post {
                 success {
