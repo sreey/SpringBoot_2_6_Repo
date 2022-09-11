@@ -30,7 +30,7 @@ pipeline {
             ])
     }
 
-  
+
 
     stages {
 
@@ -109,16 +109,14 @@ pipeline {
 
         }
 
-        docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
-
        stage('Docker Build') {
-           image = docker.build("${dockerRegistry}/${dockerRepository}", "--pull --no-cache .")
+
+            docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
+               image = docker.build("${dockerRegistry}/${dockerRepository}", "--pull --no-cache .")
+               image.push()
+            }
        }
 
-       stage('Docker Push') {
-           image.push()
-       }
-   }
 
         stage('Cleaning up') {
             steps {
