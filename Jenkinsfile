@@ -17,19 +17,21 @@ pipeline {
                     numToKeepStr: '10'
             )
 
-            parameters{
 
-                    string(name: 'dockerRepository',
-                            defaultValue: 'sreeygcp/springboot_2_6_docker_repo',
-                            description: 'The repository to push to')
-                    string(name: 'dockerRegistryCredentialsId',
-                            defaultValue: 'DockerHub_id',
-                            description: 'The Jenkins credentials id for docker registry to use')
+    }
 
-                    string(name: 'dockerRegistry', defaultValue: 'registry.hub.docker.com',
-                          description: 'The docker registry to use (DNS name only)') 
+    parameters {
 
-            }
+            string(name: 'dockerRepository',
+                    defaultValue: 'sreeygcp/springboot_2_6_docker_repo',
+                    description: 'The repository to push to')
+            string(name: 'dockerRegistryCredentialsId',
+                    defaultValue: 'DockerHub_id',
+                    description: 'The Jenkins credentials id for docker registry to use')
+
+            string(name: 'dockerRegistry', defaultValue: 'registry.hub.docker.com',
+                  description: 'The docker registry to use (DNS name only)')
+
     }
 
 
