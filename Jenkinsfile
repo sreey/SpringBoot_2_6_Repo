@@ -55,15 +55,23 @@ pipeline {
             }
         }
 
-        stage('Build Code') {
-            when {
-                branch 'feature/*'
-            }
+        stage ('Initialize') {
             steps {
-                sh """
-                echo "Building Artifact"
-                """
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
 
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install' 
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
             }
         }
 
