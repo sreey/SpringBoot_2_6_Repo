@@ -18,6 +18,20 @@ pipeline {
             )
     }
 
+    properties([
+            parameters([
+                    string(name: 'dockerRegistry',
+                            defaultValue: 'registry.hub.docker.com',
+                            description: 'The docker registry to use (DNS name only)',),
+                    string(name: 'dockerRepository',
+                            defaultValue: 'sreeygcp/springboot_2_6_docker_repo',
+                            description: 'The repository to push to',),
+                    string(name: 'dockerRegistryCredentialsId',
+                            defaultValue: 'DockerHub_id',
+                            description: 'The Jenkins credentials id for docker registry to use',)
+            ])
+    ])
+
     stages {
 
         stage('Cleanup Workspace') {
@@ -97,14 +111,10 @@ pipeline {
 
         stage('Push Docker image to docker hub') {
             steps {
-                script {
-                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-
-                    }
-                    sh '''
-                    cd SpringBootRest
-                    mvn docker:push
-                    '''
+                  docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
+                     image = docker.build("${dockerRegistry}/$(dockerRepository)", "--pull --no-cache .")
+                     image.push()
+                  }
                 }
             }
         }
@@ -114,7 +124,7 @@ pipeline {
             sh """
             echo "Running Cleaning Up"
             """
-              //  sh "docker rmi $registry:$BUILD_NUMBER"
+              
             }
         }
     }
