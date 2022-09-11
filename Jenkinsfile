@@ -77,8 +77,9 @@ pipeline {
                     sh '''
                         echo "Running build post success Analysis"
                           echo "PWD = ${PWD}"
+                          cd SpringBootRest
+                          junit 'target/surefire-reports/**/*.xml'
                     '''
-                  //  junit 'target/surefire-reports/**/*.xml'
                 }
             }
         }
@@ -96,7 +97,7 @@ pipeline {
         stage('Push Docker image to docker hub') {
             steps {
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( 'https://registry.hub.docker.com, registryCredential ) {
                         dockerImage.push()
                     }
                 }
