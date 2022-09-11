@@ -16,9 +16,7 @@ pipeline {
                     daysToKeepStr: '16',
                     numToKeepStr: '10'
             )
-    }
 
-    properties([
             parameters([
                     string(name: 'dockerRegistry',
                             defaultValue: 'registry.hub.docker.com',
@@ -30,7 +28,9 @@ pipeline {
                             defaultValue: 'DockerHub_id',
                             description: 'The Jenkins credentials id for docker registry to use',)
             ])
-    ])
+    }
+
+  
 
     stages {
 
