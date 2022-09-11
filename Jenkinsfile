@@ -107,6 +107,9 @@ pipeline {
 
         stage('Cleaning up') {
             steps {
+            sh """
+            echo "Running Cleaning Up"
+            """
               //  sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
