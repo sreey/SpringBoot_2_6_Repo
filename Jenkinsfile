@@ -78,8 +78,8 @@ pipeline {
                         echo "Running build post success Analysis"
                           echo "PWD = ${PWD}"
                           cd SpringBootRest
-                          junit 'target/surefire-reports/**/*.xml'
                     '''
+                    junit 'target/surefire-reports/**/*.xml'
                 }
             }
         }
