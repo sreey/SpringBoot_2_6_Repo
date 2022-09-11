@@ -102,6 +102,7 @@ pipeline {
 
                     }
                     sh '''
+                    cd SpringBootRest
                     mvn docker:push
                     '''
                 }
