@@ -99,8 +99,11 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-                        mvn docker:push
+
                     }
+                    sh '''
+                    mvn docker:push
+                    '''
                 }
             }
         }
