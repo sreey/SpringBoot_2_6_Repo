@@ -90,41 +90,17 @@ pipeline {
                       mvn clean install
                 '''
             }
-            post {
-                success {
-                    sh '''
-                        echo "Running build post success Analysis"
-
-                          cd SpringBootRest
-                          echo "PWD = ${PWD}"
-                    '''
-                //    junit 'target/surefire-reports/**/*.xml'
-                }
-            }
         }
 
-        stage('Building Docker image') {
-            steps {
-               sh '''
-                  //    cd SpringBootRest
-                  //    mvn docker:build
-                  echo "Running build docker image"
 
-                '''
-
-            }
-
-        }
 
        stage('Docker Build') {
        steps {
-
-
-          withCredentials([usernamePassword(credentialsId: '${dockerRegistryCredentialsId}', usernameVariable: 'sreeygcp', passwordVariable: 'aadvik5958')]) {
-        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-        sh "docker build -t ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
-        sh "docker push ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
-      }
+            withCredentials([usernamePassword(credentialsId: '${dockerRegistryCredentialsId}')]) {
+              sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+              sh "docker build -t ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
+              sh "docker push ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
+            }
           }
        }
 
