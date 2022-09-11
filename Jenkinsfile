@@ -99,7 +99,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-                        dockerImage.push()
+                        sh 'docker push'
                     }
                 }
             }
@@ -107,7 +107,7 @@ pipeline {
 
         stage('Cleaning up') {
             steps {
-                sh "docker rmi $registry:$BUILD_NUMBER"
+              //  sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
