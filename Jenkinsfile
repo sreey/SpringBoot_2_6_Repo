@@ -112,7 +112,7 @@ pipeline {
         docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
 
        stage('Docker Build') {
-           image = docker.build("${dockerRegistry}/$(dockerRepository)", "--pull --no-cache .")
+           image = docker.build("${dockerRegistry}/${dockerRepository}", "--pull --no-cache .")
        }
 
        stage('Docker Push') {
