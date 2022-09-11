@@ -67,8 +67,10 @@ pipeline {
 
         stage ('Build') {
             steps {
-                cd SpringBootRest
-                sh 'mvn clean install'
+                sh '''
+                      cd SpringBootRest
+                      mvn clean install
+                '''
             }
             post {
                 success {
