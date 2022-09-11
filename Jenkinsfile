@@ -110,11 +110,13 @@ pipeline {
         }
 
        stage('Docker Build') {
+       steps {
           script {
             docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
                image = docker.build("${dockerRegistry}/${dockerRepository}", "--pull --no-cache .")
                image.push()
             }
+          }
           }
        }
 
