@@ -17,7 +17,7 @@ pipeline {
                     numToKeepStr: '10'
             )
 
-            parameters([
+            parameters{
                     string(name: 'dockerRegistry',
                             defaultValue: 'registry.hub.docker.com',
                             description: 'The docker registry to use (DNS name only)',),
@@ -27,7 +27,7 @@ pipeline {
                     string(name: 'dockerRegistryCredentialsId',
                             defaultValue: 'DockerHub_id',
                             description: 'The Jenkins credentials id for docker registry to use',)
-            ])
+            }
     }
 
 
