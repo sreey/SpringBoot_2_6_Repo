@@ -108,7 +108,7 @@ pipeline {
                sh '''
                  cd SpringBootRest
                   echo "Running build docker image"
-                  app= mvn docker:build
+                //  app= mvn docker:build
 
 
                 '''
