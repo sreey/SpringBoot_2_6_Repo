@@ -8,6 +8,7 @@ pipeline {
     agent {
         node {
             label 'master'
+            def app
         }
     }
 
@@ -109,7 +110,9 @@ pipeline {
                   //    cd SpringBootRest
                   //    mvn docker:build
                   echo "Running build docker image"
+
                 '''
+
             }
 
         }
@@ -118,8 +121,8 @@ pipeline {
        steps {
           script {
             docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
-               image = docker.build("${dockerRegistry}/${dockerRepository}", "--pull --no-cache .")
-               image.push()
+               app = docker.build("${dockerRegistry}/${dockerRepository}/SpringBootRest:latest", "--pull --no-cache .")
+               app.push()
             }
           }
           }
