@@ -55,18 +55,15 @@ pipeline {
             }
         }
 
-        stage('Build Deploy Code') {
+        stage('Build Code') {
             when {
                 branch 'feature/*'
             }
             steps {
-                sh """
+                sh 'mvn clean install'
                 echo "Building Artifact"
                 """
 
-                sh """
-                echo "Deploying Code"
-                """
             }
         }
 
