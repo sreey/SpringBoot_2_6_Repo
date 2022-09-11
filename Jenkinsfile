@@ -97,9 +97,9 @@ pipeline {
        stage('Docker Build') {
        steps {
             withCredentials([usernamePassword(credentialsId: 'DockerHub_id')]) {
-              sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-              sh "docker build -t ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
-              sh "docker push ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
+              sh "docker login -u sreeygcp -p aadvik5958"
+              sh "docker build -t registry.hub.docker.com/sreeygcp/springboot_2_6_docker_repo/SpringBootRest:latest"
+              sh "docker push registry.hub.docker.com/sreeygcp/springboot_2_6_docker_repo/SpringBootRest:latest"
             }
           }
        }
