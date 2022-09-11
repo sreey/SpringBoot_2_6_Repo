@@ -103,35 +103,7 @@ pipeline {
             }
         }
 
-        stage('Building Docker image') {
-            steps {
-               sh '''
-                 cd SpringBootRest
-                  echo "Running build docker image"
-                //  app= mvn docker:build
-
-
-                '''
-
-            }
-
-        }
-
-       stage('Push Docker Build') {
-       steps {
-       sh '''
-       echo "Pushing docker image"
-       '''
-        //  script {
-        //    docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
-        //       app = docker.build("${dockerRegistry}/${dockerRepository}/SpringBootRest:latest", "--pull --no-cache .")
-        //       app.push()
-        //    }
-        //  }
-
-
-          }
-       }
+      
 
 
         stage('Cleaning up') {
