@@ -105,9 +105,10 @@ pipeline {
 
         stage('Building Docker image') {
             steps {
-                sh '''
-                      cd SpringBootRest
-                      mvn docker:build
+               sh '''
+                  //    cd SpringBootRest
+                  //    mvn docker:build
+                  echo "Running build docker image"
                 '''
             }
 
