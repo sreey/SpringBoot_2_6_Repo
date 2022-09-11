@@ -66,7 +66,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'mvn clean install' 
+                sh 'mvn - f .../SpringBootRest/pom.xml clean install' 
             }
             post {
                 success {
