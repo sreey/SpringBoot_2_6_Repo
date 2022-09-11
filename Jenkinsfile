@@ -118,12 +118,18 @@ pipeline {
 
        stage('Docker Build') {
        steps {
-          script {
-            docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
-               app = docker.build("${dockerRegistry}/${dockerRepository}/SpringBootRest:latest", "--pull --no-cache .")
-               app.push()
-            }
-          }
+        //  script {
+        //    docker.withRegistry("https://${dockerRegistry}", "${dockerRegistryCredentialsId}") {
+        //       app = docker.build("${dockerRegistry}/${dockerRepository}/SpringBootRest:latest", "--pull --no-cache .")
+        //       app.push()
+        //    }
+        //  }
+
+          withCredentials([usernamePassword(credentialsId: '${dockerRegistryCredentialsId}', usernameVariable: 'sreeygcp', passwordVariable: 'aadvik5958')]) {
+        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+        sh "docker build -t ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
+        sh "docker push ${dockerRegistry}/${dockerRepository}/SpringBootRest:latest"
+      }
           }
        }
 
